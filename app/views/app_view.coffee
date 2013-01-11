@@ -1,5 +1,6 @@
 class AppView extends Backbone.View
   noUserTemplate: require('./templates/sign_in')
+  homeTemplate: require('./templates/home')
 
   initialize: ->
     User.on 'sign-in', @render
@@ -14,5 +15,7 @@ class AppView extends Backbone.View
     if _.isNull User.current 
       @$el.html @noUserTemplate({url: @signInURL()})
     else
+      @$el.html @noUserTemplate()
+    @
 
 module.exports = AppView
