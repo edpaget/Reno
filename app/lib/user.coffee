@@ -6,6 +6,7 @@ class User extends Backbone.Events
 
   @fetchCurrent: ->
     fetcher = $.ajax "#{@apiUrl()}/users",
+      dataType: 'json'
       crossDomain: true
       xhrFields:
         withCredentials: true
@@ -14,15 +15,16 @@ class User extends Backbone.Events
     fetcher
 
   @createUser: (response, status) ->
-    User.current = if status is 'success'
-      new User response
+    if status is 'success'
+      User.current = new User response
     else
-      null
+      User.current = null
 
   constructor: (options) ->
     @name = options.name
     @id = options.id
     @apiToken = options.oauth_token
+    @username = options.github_username
 
 module.exports = User
 
