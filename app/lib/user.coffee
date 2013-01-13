@@ -1,9 +1,11 @@
 class User extends Backbone.Events
+  @current: null 
+
   @apiUrl: ->
     if location.port < 1024 then 'https://zoo-build.herokuapp.com' else 'http://localhost:3000'
 
   @fetchCurrent: ->
-    fetcher = $.ajax @apiUrl(),
+    fetcher = $.ajax "#{@apiUrl()}/users",
       crossDomain: true
       xhrFields:
         withCredentials: true

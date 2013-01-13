@@ -1,7 +1,10 @@
+Router = require 'lib/router'
+User = require 'lib/user'
+
 Application =
   initialize: ->
-    @appView = new require('views/app_view') 
-      el: '#main'
-    @router = new require('lib/router')
+   @router = new Router
+   Backbone.history.start()
+   User.fetchCurrent()
 
 module.exports = Application
