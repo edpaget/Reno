@@ -1,6 +1,16 @@
+Project = require 'models/project'
+
 class GithubProject extends Backbone.Model
   initialize: ->
     @truncateDesc() unless _.isUndefined @attributes['description']
+
+  toProject: (args) =>
+    attributes =
+      name: @get('name')
+      url: @get('html_url')
+    _.extend attributes, args
+    project = new Project attributes
+    project.save()
 
   truncateDesc: ->
     desc = @attributes['description']

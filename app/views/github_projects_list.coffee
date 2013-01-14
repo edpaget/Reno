@@ -15,8 +15,8 @@ class GithubProjectsList extends Backbone.View
     @loadCollection() unless _.isNull User.current
 
   loadCollection: =>
-    @collection.fetch()
-
+    @collection.fetch().done (data, textStatus, xhr) ->
+      console.log xhr.getResponseHeader('Link')
 
   render: =>
     list = new Array
