@@ -1,4 +1,5 @@
 Collection = require 'collections/github_projects'
+OrgSwitcher = require 'views/org_switcher'
 GhItem = require 'views/github_projects_item'
 User = require 'lib/user'
 
@@ -7,7 +8,8 @@ class GithubProjectsList extends Backbone.View
   tagName: 'div'
 
   initialize: ->
-    @collection = new Collection
+    @collection = new Collection [], {}
+    @orgSwitcher = new OrgSwitcher { parent: @ }
 
     User.on 'sign-in', @loadCollection
     @collection.on 'add reset', @render

@@ -3,7 +3,8 @@ User = require 'lib/user'
 class GithubProjects extends Backbone.Collection
   model: require 'models/github_project'
 
-  initialize: ->
+  initialize: (models, options) ->
+    @organization = options.organization
     @params =
       sort: 'pushed'
       page: 1
@@ -21,6 +22,10 @@ class GithubProjects extends Backbone.Collection
       url = "#{url}&#{key}=#{value}"
     url
 
-  url: "https://api.github.com/user/repos"
+  url: ->
+    if _.isUndefined @organization
+      "https://api.github.com/user/repos"
+    else
+      "https://api.github.com/orgs/#{@organization}/repos"
 
 module.exports = GithubProjects

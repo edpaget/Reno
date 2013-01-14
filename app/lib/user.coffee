@@ -11,7 +11,7 @@ class User extends Backbone.Events
       xhrFields:
         withCredentials: true
     fetcher.always @createUser
-    fetcher.success -> User.trigger 'sign-in'
+    fetcher.done -> User.trigger 'sign-in'
     fetcher
 
   @createUser: (response, status) ->
@@ -21,10 +21,23 @@ class User extends Backbone.Events
       User.current = null
 
   constructor: (options) ->
+    _.extend @, Backbone.Events
     @name = options.name
     @id = options.id
     @apiToken = options.oauth_token
     @username = options.github_username
+    @orgs = new Array
+    @loadOrgs()
+
+  loadOrgs: =>
+    fetcher = $.ajax "https://api.github.com/user/orgs?access_token=#{@apiToken}",
+      dataType: 'json'
+      crossDomain: true
+    fetcher.done (response) =>
+      @orgs.push org.login for org in response
+      @trigger 'orgs-loaded'
+    fetcher
+
 
 module.exports = User
 
