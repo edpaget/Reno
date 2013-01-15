@@ -1,6 +1,9 @@
-<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ selected }}</a>
-<ul class="dropdown-menu" role="menu" aria-labbledby="dropdownMenu">
-  {{#each orgs}}
-  <li><a tabindex="-1" href="#" data-org="{{ this }}">{{ this }}</a></li>
-  {{/each}}
-</ul>
+<div class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Switch Organization </a>
+  <ul class="dropdown-menu" role="menu" aria-labbledby="dropdownMenu">
+    <li><a tabindex="-1" href="#/add_project/{{ selected }}" data-org="{{ selected }}">{{ selected }} #</a></li>
+    {{#each orgs}}
+    <li><a tabindex="-1" href="#/add_project/{{ this }}" data-org="{{ this }}">{{ this }}</a></li>
+    {{/each}}
+  </ul>
+</div>

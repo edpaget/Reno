@@ -23,7 +23,7 @@ class GithubProjects extends Backbone.Collection
     url
 
   url: ->
-    if _.isUndefined @organization
+    if (_.isUndefined @organization) or (@organization is User.current?.username)
       "https://api.github.com/user/repos"
     else
       "https://api.github.com/orgs/#{@organization}/repos"

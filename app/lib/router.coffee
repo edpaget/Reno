@@ -4,6 +4,7 @@ class Router extends Backbone.Router
   routes:
     ''            : 'home'
     'add_project' : 'addProject'
+    'add_project/:org' : 'addProject'
 
   initialize: ->
     @appView = new AppView { el: '#main' }
@@ -11,7 +12,8 @@ class Router extends Backbone.Router
   home: ->
     @appView.render()
 
-  addProject: ->
-    @appView.setActive 'ghProjectList'
+  addProject: (org) ->
+    console.log org
+    @appView.setAddProject org
 
 module.exports = Router

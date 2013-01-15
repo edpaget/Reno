@@ -23,6 +23,11 @@ class AppView extends Backbone.View
       @active = @[view]
     @render()
 
+  setAddProject: (org) ->
+    @ghProjectList.switchOrg org unless _.isUndefined org
+    @active = @ghProjectList
+    @render()
+
   render: =>
     if _.isNull User.current 
       @$el.html @noUserTemplate({url: @signInURL()})

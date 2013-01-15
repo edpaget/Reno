@@ -20,8 +20,13 @@ class GithubProjectsList extends Backbone.View
     @collection.fetch().done (data, textStatus, xhr) ->
       console.log xhr.getResponseHeader('Link')
 
+  switchOrg: (org) =>
+    @collection.organization = org
+    @collection.fetch()
+
   render: =>
     list = new Array
+    @$el.html @orgSwitcher.render().el
     @collection.each (model) =>
       list.push new GhItem({model: model})
     _(list).each (item) =>
