@@ -14,13 +14,15 @@ class GithubProjectsList extends Backbone.View
     User.on 'sign-in', @loadCollection
     @collection.on 'add reset', @render
 
-    @loadCollection() unless _.isNull User.current
+    @loadCollection() 
 
   loadCollection: =>
-    @collection.fetch().done (data, textStatus, xhr) ->
-      console.log xhr.getResponseHeader('Link')
+    unless _.isNull User.current
+      @collection.fetch().done (data, textStatus, xhr) ->
+        console.log xhr.getResponseHeader('Link')
 
   switchOrg: (org) =>
+    @org = org
     @collection.organization = org
     @collection.fetch()
 
@@ -28,7 +30,7 @@ class GithubProjectsList extends Backbone.View
     list = new Array
     @$el.html @orgSwitcher.render().el
     @collection.each (model) =>
-      list.push new GhItem({model: model})
+      list.push new GhItem({model: model, org: @org})
     _(list).each (item) =>
       @$el.append item.render().el
     @

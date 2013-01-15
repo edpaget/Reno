@@ -1,3 +1,5 @@
+User = require 'lib/user'
+
 class GithubProjectsItem extends Backbone.View
   template: require('./templates/gh_list_item')
   className: 'gh-project-item'
@@ -6,6 +8,9 @@ class GithubProjectsItem extends Backbone.View
   events:
     'click button' : 'showForm'
     'submit' : 'newProject'
+
+  initialize: (options) ->
+    @org = options.org
 
   render: =>
     @$el.html @template(@model.toJSON())
@@ -31,6 +36,7 @@ class GithubProjectsItem extends Backbone.View
       git_branch: @$('[name="git-branch"]').val()
       build_step: @$('[name="build-step"]').val()
       build_dir: @$('[name="build-dir"]').val()
+      organization: if _.isUndefined @org then User.current.username else @org
     @model.toProject args
 
 

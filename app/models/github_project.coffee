@@ -6,7 +6,7 @@ class GithubProject extends Backbone.Model
 
   toProject: (args) =>
     attributes =
-      name: @get('name')
+      name: "#{args.organization}/#{@get('name')}"
       url: @get('html_url')
     _.extend attributes, args
     project = new Project attributes

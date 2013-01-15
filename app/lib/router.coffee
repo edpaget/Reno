@@ -13,7 +13,6 @@ class Router extends Backbone.Router
     @appView.render()
 
   addProject: (org) ->
-    console.log org
     @appView.setAddProject org
 
 module.exports = Router
