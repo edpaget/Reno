@@ -1,4 +1,6 @@
-class ProjectsItem extends Backbone.View
+ItemWithForm = require 'views/item_with_form'
+
+class ProjectsItem extends ItemWithForm
   template: require './templates/projects_item'
   className: 'project-item'
 

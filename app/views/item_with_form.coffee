@@ -1,4 +1,4 @@
-ItemWithForm =
+class ItemWithForm extends Backbone.View
   showForm: (formSelector, buttonSelector, buttonText) =>
     form = @$(formSelector)
     button = @$(buttonSelector)

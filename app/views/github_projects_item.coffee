@@ -1,6 +1,7 @@
 User = require 'lib/user'
+ItemWithForm = require 'views/item_with_form'
 
-class GithubProjectsItem extends Backbone.View
+class GithubProjectsItem extends ItemWithForm
   template: require('./templates/gh_list_item')
   className: 'gh-project-item'
   tagName: 'div'
@@ -10,7 +11,6 @@ class GithubProjectsItem extends Backbone.View
     'submit' : 'newProject'
 
   initialize: (options) ->
-    _.extend @, require('views/item_with_form')
     @org = options.org
 
   render: =>
