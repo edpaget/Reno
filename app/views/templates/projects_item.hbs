@@ -9,7 +9,7 @@
   <div class="span4 buttons">
     <button class="btn btn-primary view-project-btn">View</button>
     <button class="btn btn-primary edit-project-btn">Edit</button>
-    <button class="btn btn-danger deploy-btn">Deploy</button>
+    <a href="#deploy-last-commit" role="button" data-toggle="modal" class="btn btn-danger deploy-btn">Deploy</a>
   </div>
 </div>
 
@@ -30,8 +30,7 @@
     <div class="span6">
       <h4> Most Recent Commit </h4>
       <ul>
-        {{#with last_commit}}
-        <li>Ref: <a href="{{ github_repository }}/{{ git_ref }}">{{ git_ref}}</a></li>
+        <li>Ref: <a href="{{ github_repository }}/{{#with last_commit}}{{ git_ref }}">{{ git_ref}}</a></li>
         <li>Commiter: {{ commit_user }}</li>
         <li>Message: {{ commit_message }}</li>
         <li>Time: {{ commit_time }}</li>
@@ -63,5 +62,19 @@
         </div>
       </fieldset>
     </form>
+  </div>
+</div>
+
+<div id="deploy-last-commit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deploy-model-header" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="deploy-model-header">Deploy Last Commit</h3>
+  </div>
+  <div class="modal-body">
+    <p> You are about to deploy commit #<a href="{{ github_repository }}/{{#with last_commit}}{{ git_ref }}{{/with}}">{{#with last_commit}}{{ git_ref }}{{/with}}</a>  from {{ name }} to the S3 bucket {{ s3_bucket }}.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <button class="btn btn-danger final-deploy-btn">Deploy</button>
   </div>
 </div>
