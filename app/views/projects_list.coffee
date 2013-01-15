@@ -1,5 +1,6 @@
 Collection = require 'collections/projects'
 Item = require 'views/projects_item'
+User = require 'lib/user'
 
 class ProjectsList extends Backbone.View
   className: "projects-list"
@@ -14,13 +15,24 @@ class ProjectsList extends Backbone.View
   loadCollection: =>
     @collection.fetch() unless _.isNull User.current
 
-  render: (id) =>
+  setProject: (project_name) =>
+    if _.isUndefined project_name
+      @project = undefined
+    else
+      @project = @find (project) =>
+        project.name is project_name
+
+  render: =>
     subviews = new Array
-    if _.isUndefined id
+    if _.isUndefined @project
       @collection.each (model) =>
         subviews.push new Item { model: model }
-      _(subviews).each (view) =>
-        @$el.append view.render().el
+      _(subviews).each (subview) =>
+        @$el.append subview.render().el
+    else
+      subview = new Item { model: @project }
+      @$el.html subview.render().el
+    @
 
 
 module.exports = ProjectsList

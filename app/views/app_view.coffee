@@ -1,5 +1,6 @@
 User = require 'lib/user'
 GhProjectsList = require 'views/github_projects_list'
+ProjectsList = require 'views/projects_list'
 
 class AppView extends Backbone.View
   noUserTemplate: require('./templates/sign_in')
@@ -8,6 +9,7 @@ class AppView extends Backbone.View
   initialize: ->
     @active = new Backbone.View
     @ghProjectList = new GhProjectsList
+    @projectList = new ProjectsList
     User.on 'sign-in', @render
 
   signInURL: ->
@@ -26,6 +28,11 @@ class AppView extends Backbone.View
   setAddProject: (org) ->
     @ghProjectList.switchOrg org unless _.isUndefined org
     @active = @ghProjectList
+    @render()
+
+  setProject: (project_name) ->
+    @projectList.setProject project_name
+    @active = @projectList
     @render()
 
   render: =>

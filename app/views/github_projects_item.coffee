@@ -6,34 +6,25 @@ class GithubProjectsItem extends Backbone.View
   tagName: 'div'
 
   events:
-    'click button' : 'showForm'
+    'click button' : 'toggleForm'
     'submit' : 'newProject'
 
   initialize: (options) ->
+    _.extend @, require('views/item_with_form')
     @org = options.org
 
   render: =>
     @$el.html @template(@model.toJSON())
     @
 
-  showForm: =>
-    form = @$('.new-project-form')
-    button = @$('button.add-project')
-    if form.hasClass 'active'
-      button.text 'Add Project'
-      button.removeClass 'btn-danger'
-      button.addClass 'btn-primary'
-    else
-      button.text 'Cancel'
-      button.removeClass 'btn-primary'
-      button.addClass 'btn-danger'
-    form.toggleClass 'active'
+  toggleForm: =>
+    @showForm  '.new-project-form', 'button.add-project', {normal: 'Add Project', cancel: 'Cancel'}
 
   newProject: (e) =>
     e.preventDefault()
     args =
       s3_bucket: @$('[name="s3-bucket"]').val()
-      git_branch: @$('[name="git-branch"]').val()
+      branch: @$('[name="git-branch"]').val()
       build_step: @$('[name="build-step"]').val()
       build_dir: @$('[name="build-dir"]').val()
       organization: if _.isUndefined @org then User.current.username else @org

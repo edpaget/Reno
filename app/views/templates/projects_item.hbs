@@ -7,9 +7,9 @@
   </div>
 
   <div class="span4 buttons">
-    <button class="btn btn-primary edit-project">Edit</button>
-    <button class="btn btn-primary view-deploys">View</button>
-    <button class="btn btn-danger deploy">Deploy</button>
+    <button class="btn btn-primary view-project-btn">View</button>
+    <button class="btn btn-primary edit-project-btn">Edit</button>
+    <button class="btn btn-danger deploy-btn">Deploy</button>
   </div>
 </div>
 
@@ -18,11 +18,11 @@
     <div class="span6">
       <h4> General Info </h4>
       <ul>
-        <li>Github Link: <a href="{{ github_url }}">{{ github_url }}</a></li>
-        <li>Last Deploy: </li>
+        <li>Github Link: <a href="{{ github_url }}">{{ github_repository }}</a></li>
+        <li>Last Deploy: None Yet </li>
         <li>Git Branch: {{ branch }}</li>
         <li>Build Command: {{ build_step }}</li>
-        <li>Build Directory: {{ build_directory }}</li>
+        <li>Build Directory: {{ build_dir }}</li>
         <li>S3 Bucket: {{ s3_bucket }}</li>
       </ul>
       {{#if last_commit}}
@@ -31,7 +31,7 @@
       <h4> Most Recent Commit </h4>
       <ul>
         {{#with last_commit}}
-        <li>Ref: <a href="{{ github_url}}/{{ git_ref }}">{{ git_ref}}</a></li>
+        <li>Ref: <a href="{{ github_repository }}/{{ git_ref }}">{{ git_ref}}</a></li>
         <li>Commiter: {{ commit_user }}</li>
         <li>Message: {{ commit_message }}</li>
         <li>Time: {{ commit_time }}</li>
@@ -40,6 +40,7 @@
       {{else}}
       <h4>No Recent Commits</h4>
       {{/if}}
+      <button class="btn btn-primary">Show Previous Deploys</button>
     </div>
   </div>
   <div class="edit-project">
@@ -48,17 +49,17 @@
         <legend>Edit Zookeeper Project - {{ name }}</legend>
         <div class="span6">
           <label>S3 Bucket Name</label>
-          <input name="s3-bucket" type="text" />
+          <input name="s3-bucket" type="text" value="{{ s3_bucket }}" />
           <label>Git Branch</label>
-          <input name="git-branch" type="text" value="master"/>
+          <input name="git-branch" type="text" value="{{ branch }}" />
         </div>
         <div class="span6">
           <label>Build Step</label>
-          <input name="build-step" type="text" placeholder="bash command that builds project" />
+          <input name="build-step" type="text" value="{{ build_step }}" />
           <label>Build Directory</label>
-          <input name="build-dir" type="text" placeholder="directory previous script build into" />
+          <input name="build-dir" type="text" value="{{ build_dir }}" />
           <br />
-          <button type="submit" class="btn">Create New Project</button>
+          <button type="submit" class="btn">Update Project</button>
         </div>
       </fieldset>
     </form>

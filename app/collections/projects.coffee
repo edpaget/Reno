@@ -1,5 +1,5 @@
 class Projects extends Backbone.Collection
-  model: require 'models/projects'
+  model: require 'models/project'
 
   url: "/projects"
 
