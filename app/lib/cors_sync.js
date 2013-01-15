@@ -1,5 +1,9 @@
 corsSync = function(method, model, options) {
-  baseUrl = "https://zoo-build.herokuapp.com";
+  if (location.port < 1024) {
+    baseURL = "https://zoo-build.herokuapp.com";
+  } else {
+    baseURL = "http://localhost:3000";
+  }
   options.url = baseURL + _.result(model, 'url');
   options.crossDomain = true;
   options.xhrFields = { withCredentials: true };

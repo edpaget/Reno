@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="span7 project">
+    <h3>
+      <a href="#">{{ name }}</a>
+      <small>A Time Stamp Here</small>
+    </h3>
+  </div>
+
+  <div class="span4 buttons">
+    <button class="btn btn-primary edit-project">Edit</button>
+    <button class="btn btn-primary view-deploys">View</button>
+    <button class="btn btn-danger deploy">Deploy</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="view-project">
+    <div class="span6">
+      <h4> General Info </h4>
+      <ul>
+        <li>Github Link: <a href="{{ github_url }}">{{ github_url }}</a></li>
+        <li>Last Deploy: </li>
+        <li>Git Branch: {{ branch }}</li>
+        <li>Build Command: {{ build_step }}</li>
+        <li>Build Directory: {{ build_directory }}</li>
+        <li>S3 Bucket: {{ s3_bucket }}</li>
+      </ul>
+      {{#if last_commit}}
+    </div>
+    <div class="span6">
+      <h4> Most Recent Commit </h4>
+      <ul>
+        {{#with last_commit}}
+        <li>Ref: <a href="{{ github_url}}/{{ git_ref }}">{{ git_ref}}</a></li>
+        <li>Commiter: {{ commit_user }}</li>
+        <li>Message: {{ commit_message }}</li>
+        <li>Time: {{ commit_time }}</li>
+        {{/with}}
+      </ul>
+      {{else}}
+      <h4>No Recent Commits</h4>
+      {{/if}}
+    </div>
+  </div>
+  <div class="edit-project">
+    <form>
+      <fieldset>
+        <legend>Edit Zookeeper Project - {{ name }}</legend>
+        <div class="span6">
+          <label>S3 Bucket Name</label>
+          <input name="s3-bucket" type="text" />
+          <label>Git Branch</label>
+          <input name="git-branch" type="text" value="master"/>
+        </div>
+        <div class="span6">
+          <label>Build Step</label>
+          <input name="build-step" type="text" placeholder="bash command that builds project" />
+          <label>Build Directory</label>
+          <input name="build-dir" type="text" placeholder="directory previous script build into" />
+          <br />
+          <button type="submit" class="btn">Create New Project</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
