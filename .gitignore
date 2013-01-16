@@ -27,3 +27,4 @@ tmp/
 
 # Build files
 public/
+build/
