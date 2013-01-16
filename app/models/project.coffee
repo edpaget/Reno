@@ -1,5 +1,9 @@
 class Project extends Backbone.Model
-  url: '/projects'
+  url: ->
+    if _.isUndefined @id
+      "/projects"
+    else
+      "/projects/#{@id}"
 
   sync: require 'lib/cors_sync'
 

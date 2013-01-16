@@ -12,6 +12,7 @@ class ProjectsItem extends ItemWithForm
     'click button.view-project-btn' : 'toggleView'
     'click button.final-delete-btn' : 'destroy'
     'click button.final-deploy-btn' : 'deployProject'
+    'submit' : 'updateProject'
 
   toggleEdit: =>
     @toggleView() if @$('.view-project').hasClass('active')
@@ -25,12 +26,20 @@ class ProjectsItem extends ItemWithForm
     @$el.html @template(@model.toJSON())
     @
 
-  destory: =>
+  destroy: =>
     @model.destroy()
     @undelegateEvents()
     @remove()
 
   deployProject: =>
     @model.deploy()
+
+  updateProject: (e) =>
+    e.preventDefault()
+    @model.save
+      s3_bucket: @$('[name="s3-bucket"]').val()
+      branch: @$('[name="git-branch"]').val()
+      build_step: @$('[name="build-step"]').val()
+      build_dir: @$('[name="build-dir"]').val()
 
 module.exports = ProjectsItem
