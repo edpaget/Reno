@@ -6,6 +6,7 @@ class ProjectsItem extends ItemWithForm
 
   initialize: (options) ->
     _.extend @, require('views/item_with_form')
+    @model.on 'change', @render
 
   events:
     'click button.edit-project-btn' : 'toggleEdit'
@@ -41,5 +42,6 @@ class ProjectsItem extends ItemWithForm
       branch: @$('[name="git-branch"]').val()
       build_step: @$('[name="build-step"]').val()
       build_dir: @$('[name="build-dir"]').val()
+    @toggleEdit()
 
 module.exports = ProjectsItem
