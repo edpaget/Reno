@@ -1,15 +1,17 @@
 User = require 'lib/user'
 GhProjectsList = require 'views/github_projects_list'
 ProjectsList = require 'views/projects_list'
+MessagesList = require 'views/messages_list'
 
 class AppView extends Backbone.View
   noUserTemplate: require('./templates/sign_in')
   homeTemplate: require('./templates/home')
 
   initialize: ->
-    @active = new Backbone.View
+    @messagesList = new MessagesList
     @ghProjectList = new GhProjectsList
     @projectList = new ProjectsList
+    @active = @messagesList
     User.on 'sign-in', @render
 
   signInURL: ->
@@ -36,10 +38,10 @@ class AppView extends Backbone.View
     @render()
 
   render: =>
+    @$el.html @homeTemplate()
     if _.isNull User.current 
-      @$el.html @noUserTemplate({url: @signInURL()})
+      @$('#content').html @noUserTemplate({url: @signInURL()})
     else
-      @$el.html @homeTemplate()
       @$('#content').html @active.render().el
     @
 
