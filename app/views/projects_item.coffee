@@ -10,6 +10,8 @@ class ProjectsItem extends ItemWithForm
   events:
     'click button.edit-project-btn' : 'toggleEdit'
     'click button.view-project-btn' : 'toggleView'
+    'click button.final-delete-btn' : 'destroy'
+    'click button.final-deploy-btn' : 'deployProject'
 
   toggleEdit: =>
     @toggleView() if @$('.view-project').hasClass('active')
@@ -22,5 +24,13 @@ class ProjectsItem extends ItemWithForm
   render: =>
     @$el.html @template(@model.toJSON())
     @
+
+  destory: =>
+    @model.destroy()
+    @undelegateEvents()
+    @remove()
+
+  deployProject: =>
+    @model.deploy()
 
 module.exports = ProjectsItem
