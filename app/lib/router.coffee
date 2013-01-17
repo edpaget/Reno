@@ -12,7 +12,7 @@ class Router extends Backbone.Router
     @appView = new AppView { el: '#main' }
 
   home: ->
-    @appView.render()
+    @appView.setActive 'messagesList'
 
   addProject: (org) ->
     @appView.setAddProject org
