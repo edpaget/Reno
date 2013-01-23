@@ -2,7 +2,7 @@ class User extends Backbone.Events
   @current: null 
 
   @apiUrl: ->
-    if location.port < 1024 then 'https://zoo-build.herokuapp.com' else 'http://localhost:3000'
+    if location.port < 1024 then 'http://renoapi.zooniverse.org' else 'http://localhost:3000'
 
   @fetchCurrent: ->
     fetcher = $.ajax "#{@apiUrl()}/users",

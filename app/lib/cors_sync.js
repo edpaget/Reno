@@ -1,6 +1,6 @@
 corsSync = function(method, model, options) {
   if (location.port < 1024) {
-    baseURL = "https://zoo-build.herokuapp.com";
+    baseURL = "http://renoapi.zooniverse.org"
   } else {
     baseURL = "http://localhost:3000";
   }
