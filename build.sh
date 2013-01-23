@@ -2,7 +2,7 @@
 
 # Setup Build Directorys and Brunch Build the Application
 echo 'building application...'
-brunch build --minify
+brunch build -o
 
 timestamp=`date -u +%Y-%m-%d_%H-%M-%S`
 
