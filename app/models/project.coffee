@@ -9,7 +9,7 @@ class Project extends Backbone.Model
 
   deploy: ->
     url = if location.port < 1024
-      "https://zoo-build.herokuapp.com/projects/#{@id}/build"
+      "http://renoapi.zooniverse.org/projects/#{@id}/build"
     else
       "http://localhost:3000/projects/#{@id}/build"
     fetcher = $.ajax url,

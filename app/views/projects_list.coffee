@@ -25,11 +25,13 @@ class ProjectsList extends Backbone.View
   render: =>
     subviews = new Array
     @$el.empty()
-    if _.isUndefined @project
+    if (_.isUndefined @project) and (not @collection.isEmpty())
       @collection.each (model) =>
         subviews.push new Item { model: model }
       _(subviews).each (subview) =>
         @$el.append subview.render().el
+    else if _.isUndefined @project
+      @$el.html ''
     else
       subview = new Item { model: @project }
       @$el.html subview.render().el
