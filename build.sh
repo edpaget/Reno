@@ -1,7 +1,10 @@
 #! /bin/bash
 
 # Setup Build Directorys and Brunch Build the Application
+set -e
 echo 'building application...'
+mkdir public
+
 brunch build -o
 
 timestamp=`date -u +%Y-%m-%d_%H-%M-%S`
@@ -14,7 +17,7 @@ mv public/stylesheets/app.css "public/stylesheets/app-$timestamp.css"
 mv public/stylesheets/vendor.css "public/stylesheets/vendor-$timestamp.css"
 
 # Compress Assests
-echo 'compress asses...'
+echo 'compress assets...'
 gzip -9 -c "public/javascripts/app-$timestamp.js" > "public/javascripts/app-$timestamp.js.gz"
 gzip -9 -c "public/javascripts/vendor-$timestamp.js" > "public/javascripts/vendor-$timestamp.js.gz"
 gzip -9 -c "public/stylesheets/app-$timestamp.css" > "public/stylesheets/app-$timestamp.css.gz"
