@@ -8,7 +8,7 @@ class GithubProjects extends Backbone.Collection
     @params =
       sort: 'pushed'
       page: 1
-      per_page: 10
+      per_page: 30
 
   sync: (method, model, options) ->
     baseURL = "#{_.result(model, 'url')}?access_token=#{User.current.apiToken}"
