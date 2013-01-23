@@ -18,7 +18,7 @@ class AppView extends Backbone.View
     if location.port > 1024 
       return "http://localhost:3000/auth/github"
     else
-      return "http://renoapi.zooniverse.org"
+      return "http://renoapi.zooniverse.org/auth/github"
 
   setActive: (view) ->
     if _.isUndefined view
