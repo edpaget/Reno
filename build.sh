@@ -5,6 +5,7 @@ set -e
 echo 'building application...'
 mkdir public
 
+npm install .
 brunch build -o
 
 timestamp=`date -u +%Y-%m-%d_%H-%M-%S`
