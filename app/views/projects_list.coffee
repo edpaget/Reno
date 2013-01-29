@@ -15,12 +15,14 @@ class ProjectsList extends Backbone.View
   loadCollection: =>
     @collection.fetch() unless _.isNull User.current
 
-  setProject: (project_name) =>
+  setProject: (org, project_name) =>
     if _.isUndefined project_name
       @project = undefined
     else
-      @project = @find (project) =>
-        project.name is project_name
+      @project = @collection.find (project) =>
+        console.log project.get('name'), "#{org}/#{project_name}"
+        project.get('name') is "#{org}/#{project_name}"
+      console.log @project
 
   render: =>
     subviews = new Array

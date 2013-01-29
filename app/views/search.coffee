@@ -4,11 +4,10 @@ class Search extends Backbone.View
   initialize: (options) ->
     @projectCollection = options.projectCollection
     @searchResults = new SearchResults
-    console.log @$('.search-query')
 
   events: 
     'keypress .search-query' : 'searchCollection'
-    'blur .search-query' : 'stopSearch'
+    'blur' : 'stopSearch'
 
   render: (query) =>
     projectResults = @projectCollection.filter (project) ->
@@ -17,7 +16,6 @@ class Search extends Backbone.View
     @
 
   searchCollection: (e) =>
-    console.log 'here'
     if e.which is 13
       @stopSearch e
     else

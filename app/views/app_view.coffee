@@ -35,8 +35,8 @@ class AppView extends Backbone.View
     @active = @ghProjectList
     @render()
 
-  setProject: (project_name) ->
-    @projectList.setProject project_name
+  setProject: (org, project_name) ->
+    @projectList.setProject org, project_name
     @projectList.loadCollection()
     @active = @projectList
     @render()
