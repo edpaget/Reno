@@ -1,0 +1,9 @@
+<div class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Switch Organization </a>
+  <ul class="dropdown-menu" role="menu" aria-labbledby="dropdownMenu">
+    <li><a tabindex="-1" href="#/add_project/<%- @selected %>" data-org="<%- @selected %>"><%- @selected %>#</a></li>
+    <% for org in @orgs: %>
+    <li><a tabindex="-1" href="#/add_project/<%- org %>" data-org="<%- this %>"><%- this %></a></li>
+    <% end %>
+  </ul>
+</div>

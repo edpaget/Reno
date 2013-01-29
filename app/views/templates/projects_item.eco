@@ -1,7 +1,7 @@
 <div class="row">
   <div class="span7 project">
     <h3>
-      <a href="#">{{ name }}</a>
+      <a href="#"><%- @name %></a>
       <small>A Time Stamp Here</small>
     </h3>
   </div>
@@ -19,45 +19,44 @@
     <div class="span6">
       <h4> General Info </h4>
       <ul>
-        <li>Github Link: <a href="{{ github_url }}">{{ github_repository }}</a></li>
+        <li>Github Link: <a href="<%- @github_url %>"><%- @github_repository %></a></li>
         <li>Last Deploy: None Yet </li>
-        <li>Git Branch: {{ branch }}</li>
-        <li>Build Command: {{ build_step }}</li>
-        <li>Build Directory: {{ build_dir }}</li>
-        <li>S3 Bucket: {{ s3_bucket }}</li>
+        <li>Git Branch: <%- @branch %></li>
+        <li>Build Command: <%- @build_step %></li>
+        <li>Build Directory: <%- @build_dir %></li>
+        <li>S3 Bucket: <%- @s3_bucket %></li>
       </ul>
-      {{#if last_commit}}
     </div>
     <div class="span6">
+    <% if not _.isUndefined(@last_commit) %>
       <h4> Most Recent Commit </h4>
       <ul>
-        <li>Ref: <a href="{{ github_repository }}/{{#with last_commit}}{{ git_ref }}">{{ git_ref}}</a></li>
-        <li>Commiter: {{ commit_user }}</li>
-        <li>Message: {{ commit_message }}</li>
-        <li>Time: {{ commit_time }}</li>
-        {{/with}}
+        <li>Ref: <a href="<%- @github_repository %>/<%- @last_commit.git_ref %>"><%- @last_commit.git_ref %></a></li>
+        <li>Commiter: <%- @last_commit.commit_user %></li>
+        <li>Message: <%- @last_commit.commit_message %></li>
+        <li>Time: <%- @last_commit.commit_time %></li>
       </ul>
-      {{else}}
+    <% else %>
       <h4>No Recent Commits</h4>
-      {{/if}}
+    <% end %> 
       <button class="btn btn-primary">Show Previous Deploys</button>
     </div>
   </div>
   <div class="edit-project">
     <form>
       <fieldset>
-        <legend>Edit Zookeeper Project - {{ name }}</legend>
+        <legend>Edit Zookeeper Project - <%- @name %></legend>
         <div class="span6">
           <label>S3 Bucket Name</label>
-          <input name="s3-bucket" type="text" value="{{ s3_bucket }}" />
+          <input name="s3-bucket" type="text" value="<%- @s3_bucket %>" />
           <label>Git Branch</label>
-          <input name="git-branch" type="text" value="{{ branch }}" />
+          <input name="git-branch" type="text" value="<%- @branch %>" />
         </div>
         <div class="span6">
           <label>Build Step</label>
-          <input name="build-step" type="text" value="{{ build_step }}" />
+          <input name="build-step" type="text" value="<%- @build_step %>" />
           <label>Build Directory</label>
-          <input name="build-dir" type="text" value="{{ build_dir }}" />
+          <input name="build-dir" type="text" value="<%- @build_dir %>" />
           <br />
           <button type="submit" class="btn">Update Project</button>
         </div>
@@ -66,19 +65,21 @@
   </div>
 </div>
 
+<% if not _.isUndefined(@last_commit) %>
 <div id="deploy-last-commit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deploy-modal-header" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
     <h3 id="deploy-modal-header">Deploy Last Commit</h3>
   </div>
   <div class="modal-body">
-    <p> You are about to deploy commit #<a href="{{ github_repository }}/{{#with last_commit}}{{ git_ref }}{{/with}}">{{#with last_commit}}{{ git_ref }}{{/with}}</a>  from {{ name }} to the S3 bucket {{ s3_bucket }}.</p>
+    <p> You are about to deploy commit #<a href="<%- @github_repository %>/<%- @last_commit.git_ref %>"><%- @last_commit.git_ref %></a>  from <%- @last_commit.name %> to the S3 bucket <%- @last_commit.s3_bucket %>.</p>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
     <button class="btn btn-danger final-deploy-btn" data-dismiss="modal" aria-hidden="true">Deploy</button>
   </div>
 </div>
+<% end %>
 
 <div id="delete-project" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="delete-modal-header" aria-hidden="true">
   <div class="modal-header">
@@ -86,7 +87,7 @@
     <h3 id="delete-modal-header">Delete Project</h3>
   </div>
   <div class="modal-body">
-    <p> You are about to delete {{ name }}. This cannot be undone.<p>
+    <p> You are about to delete <%- @name %>. This cannot be undone.<p>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>

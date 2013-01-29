@@ -21,7 +21,7 @@
 
     "css-brunch": ">= 1.0 < 1.4",
 
-    "handlebars-brunch": ">= 1.0 < 1.4",
+    "eco-brunch": ">= 1.0 < 1.4",
 
     "uglify-js-brunch": ">= 1.0 < 1.4",
     "clean-css-brunch": ">= 1.0 < 1.4"

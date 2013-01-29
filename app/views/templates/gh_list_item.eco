@@ -1,9 +1,9 @@
 <div class="row listing">
   <div class="span9 project">
-    <h3><a href="#">{{ name }}</a>
-      {{#if description}}
-      <small>{{ description }}</small>
-      {{/if}}
+    <h3><a href="#"><%- @name %></a>
+      <% if not _.isUndefined @description: %>
+      <small><%- @description %></small>
+      <% end %>
     </h3>
   </div>
   <div class="span2 button">
@@ -14,7 +14,7 @@
 <div class="row new-project-form">
   <form>
     <fieldset>
-      <legend>New Zookeeper Project from {{ name }}</legend>
+      <legend>New Zookeeper Project from <%- @name %></legend>
       <div class="span6">
         <label>S3 Bucket Name</label>
         <input name="s3-bucket" type="text" />
