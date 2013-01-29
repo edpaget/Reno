@@ -15,7 +15,7 @@ class ProjectsItem extends ItemWithForm
     'click button.view-project-btn' : 'toggleView'
     'click button.final-delete-btn' : 'destroy'
     'click button.final-deploy-btn' : 'deployProject'
-    'click button.prev-deploys' : 'showDeploys'
+    'click button.prev-deploys' : 'toggleDeploys'
     'submit' : 'updateProject'
 
   toggleEdit: =>
@@ -24,6 +24,7 @@ class ProjectsItem extends ItemWithForm
 
   toggleView: =>
     @toggleEdit() if @$('.edit-project').hasClass('active')
+    @deploys.remove()
     @showForm '.view-project', 'button.view-project-btn', {normal: 'View', cancel: 'Hide'}
 
   render: =>
@@ -38,9 +39,13 @@ class ProjectsItem extends ItemWithForm
   deployProject: =>
     @model.deploy()
 
-  showDeploys: =>
-    @deploys.loadCollection().done =>
-      @$('.view-project').append @deploys.render().el
+  toggleDeploys: =>
+    if @$('.deploys').html() is ''
+      @deploys.loadCollection().done =>
+        @$('.deploys').append @deploys.render().el
+    else
+      @deploys.remove()
+    @showForm '.deploys', 'button.prev-deploys', {normal: 'Show Previous Deploys', cancel: 'Hide Previous Deploys'}
 
   updateProject: (e) =>
     e.preventDefault()

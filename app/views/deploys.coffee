@@ -5,7 +5,7 @@ class Deploys extends Backbone.View
   className: 'project-deploys'
   template: require './templates/deploy'
 
-  initalize: (options) ->
+  initialize: (options) ->
     @collection = new Collection [], {projectId: options.projectId}
     @collection.on 'add reset', @render
 
@@ -13,6 +13,7 @@ class Deploys extends Backbone.View
     @collection.fetch()
 
   render: =>
+    @$el.empty()
     @collection.each (deploy) =>
       @$el.append @template(deploy.toJSON())
     @

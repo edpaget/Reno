@@ -67,6 +67,9 @@
   </div>
 </div>
 
+<div class="deploys">
+</div>
+
 <% if not _.isUndefined(@last_commit): %>
 <div id="deploy-last-commit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deploy-modal-header" aria-hidden="true">
   <div class="modal-header">
