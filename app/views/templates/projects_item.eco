@@ -9,7 +9,9 @@
   <div class="span4 buttons">
     <button class="btn btn-primary view-project-btn">View</button>
     <button class="btn btn-primary edit-project-btn">Edit</button>
+    <% if not _.isUndefined(@last_commit): %>
     <a href="#deploy-last-commit" role="button" data-toggle="modal" class="btn btn-warning deploy-btn">Deploy</a>
+    <% end %>
     <a href="#delete-project" role="button" data-toggle="modal" class="btn btn-danger delete-btn">Delete</a>
   </div>
 </div>
@@ -28,7 +30,7 @@
       </ul>
     </div>
     <div class="span6">
-    <% if not _.isUndefined(@last_commit) %>
+    <% if not _.isUndefined(@last_commit): %>
       <h4> Most Recent Commit </h4>
       <ul>
         <li>Ref: <a href="<%- @github_repository %>/<%- @last_commit.git_ref %>"><%- @last_commit.git_ref %></a></li>
@@ -36,7 +38,7 @@
         <li>Message: <%- @last_commit.commit_message %></li>
         <li>Time: <%- @last_commit.commit_time %></li>
       </ul>
-    <% else %>
+    <% else: %>
       <h4>No Recent Commits</h4>
     <% end %> 
       <button class="btn btn-primary">Show Previous Deploys</button>
@@ -65,7 +67,7 @@
   </div>
 </div>
 
-<% if not _.isUndefined(@last_commit) %>
+<% if not _.isUndefined(@last_commit): %>
 <div id="deploy-last-commit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deploy-modal-header" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>

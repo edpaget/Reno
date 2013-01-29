@@ -2,6 +2,7 @@ User = require 'lib/user'
 GhProjectsList = require 'views/github_projects_list'
 ProjectsList = require 'views/projects_list'
 MessagesList = require 'views/messages_list'
+Search = require 'views/search'
 
 class AppView extends Backbone.View
   noUserTemplate: require('./templates/sign_in')
@@ -42,6 +43,9 @@ class AppView extends Backbone.View
 
   render: =>
     @$el.html @homeTemplate()
+    @search = new Search 
+      projectCollection: @projectList.collection
+      el: '.navbar-search'
     if _.isNull User.current 
       @$('#content').html @noUserTemplate({url: @signInURL()})
     else
