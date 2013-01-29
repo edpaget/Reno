@@ -1,4 +1,5 @@
 ItemWithForm = require 'views/item_with_form'
+Deploys = require 'views/deploys'
 
 class ProjectsItem extends ItemWithForm
   template: require './templates/projects_item'
@@ -7,12 +8,14 @@ class ProjectsItem extends ItemWithForm
   initialize: (options) ->
     _.extend @, require('views/item_with_form')
     @model.on 'change', @render
+    @deploys = new Deploys {projectId: @model.id}
 
   events:
     'click button.edit-project-btn' : 'toggleEdit'
     'click button.view-project-btn' : 'toggleView'
     'click button.final-delete-btn' : 'destroy'
     'click button.final-deploy-btn' : 'deployProject'
+    'click button.prev-deploys' : 'showDeploys'
     'submit' : 'updateProject'
 
   toggleEdit: =>

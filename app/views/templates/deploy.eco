@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="span4">
+  <p><%- @message %> by <%- @commit_name %> at <%- @commit_time %>. </p>
+  </div>
+  <div class="span4">
+  <p>Status: <%- @deploy_status %> at <%- @build_time %></p>
+  </div>
+  <% if not @deploys_status is 'active': %>
+  <div class="span4">
+  <button class="btn btn-warning rollback-deploy">Deploy</button>
+  </div>
+  <% end %>
+</div>
+

@@ -41,7 +41,7 @@
     <% else: %>
       <h4>No Recent Commits</h4>
     <% end %> 
-      <button class="btn btn-primary">Show Previous Deploys</button>
+      <button class="btn btn-primary prev-deploys">Show Previous Deploys</button>
     </div>
   </div>
   <div class="edit-project">
