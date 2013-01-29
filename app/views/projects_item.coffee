@@ -40,7 +40,7 @@ class ProjectsItem extends ItemWithForm
     @model.deploy()
 
   toggleDeploys: =>
-    if @$('.deploys').html() is ''
+    unless @$('.deploys').hasClass 'active'
       @deploys.loadCollection().done =>
         @$('.deploys').append @deploys.render().el
     else
