@@ -38,6 +38,10 @@ class ProjectsItem extends ItemWithForm
   deployProject: =>
     @model.deploy()
 
+  showDeploys: =>
+    @deploys.loadCollection().done =>
+      @$('.view-project').append @deploys.render().el
+
   updateProject: (e) =>
     e.preventDefault()
     @model.save
