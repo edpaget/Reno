@@ -7,11 +7,11 @@ class OrgSwitcher extends Backbone.View
   events:
     'click li' : 'switchOrg'
 
-  initialize: (options) ->
+  initialize: (options) =>
     @parent = options.parent
     User.on 'sign-in', =>
       @selected = User.current.username
-      User.current.on 'orgs-loaded', =>
+      User.current.loadOrgs().done =>
         @orgs = User.current.orgs
         @render()
 
@@ -19,16 +19,16 @@ class OrgSwitcher extends Backbone.View
     options =
       orgs: @orgs
       selected: @selected
+    console.log options
     @$el.html @template(options)
     @
 
   switchOrg: (e) =>
     e.preventDefault()
-    console.log e
     org = e.currentTarget.dataset.org
-    index = _(@org).indexOf org
-    @org.slice index, 1
-    @org.push @selected
+    index = _(@orgs).indexOf org
+    @orgs.slice index, 1
+    @orgs.push @selected
     @selected = org
     @parent.switchOrg @selected
     @render()

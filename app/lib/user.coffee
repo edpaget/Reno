@@ -1,11 +1,10 @@
 class User extends Backbone.Events
   @current: null 
 
-  @apiUrl: ->
-    if location.port < 1024 then 'http://renoapi.zooniverse.org' else 'http://localhost:3000'
+  @apiUrl: "http://renoapi.zooniverse.org"
 
   @fetchCurrent: ->
-    fetcher = $.ajax "#{@apiUrl()}/users",
+    fetcher = $.ajax "#{@apiUrl}/users",
       dataType: 'json'
       crossDomain: true
       xhrFields:
@@ -27,7 +26,6 @@ class User extends Backbone.Events
     @apiToken = options.oauth_token
     @username = options.github_username
     @orgs = new Array
-    @loadOrgs()
 
   loadOrgs: =>
     fetcher = $.ajax "https://api.github.com/user/orgs?access_token=#{@apiToken}",

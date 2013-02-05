@@ -4,7 +4,7 @@
     <li><a tabindex="-1" href="#/add_project/<%- @selected %>" data-org="<%- @selected %>"><%- @selected %>#</a></li>
     <% if not _.isUndefined(@orgs): %>
     <% for org in @orgs: %>
-    <li><a tabindex="-1" href="#/add_project/<%- org %>" data-org="<%- org %>"><%- org %></a></li>
+    <li data-org="<%- org %>"><a tabindex="-1" href="#/add_project/<%- org %>"><%- org %></a></li>
     <% end %>
     <% end %>
   </ul>
