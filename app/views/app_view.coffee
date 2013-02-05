@@ -1,7 +1,6 @@
 User = require 'lib/user'
 GhProjectsList = require 'views/github_projects_list'
 ProjectsList = require 'views/projects_list'
-MessagesList = require 'views/messages_list'
 Search = require 'views/search'
 
 class AppView extends Backbone.View
@@ -9,7 +8,7 @@ class AppView extends Backbone.View
   homeTemplate: require('./templates/home')
 
   initialize: ->
-    @messagesList = new MessagesList
+    @home = new HomeView
     @ghProjectList = new GhProjectsList
     @projectList = new ProjectsList
     @active = @messagesList
