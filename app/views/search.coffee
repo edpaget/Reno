@@ -6,12 +6,10 @@ class Search extends Backbone.View
     @searchResults = new SearchResults
 
   events: 
-    'keypress .search-query' : 'searchCollection'
-    'blur' : 'stopSearch'
+    'keyup .search-query' : 'searchCollection'
+    'blur .search-query' : 'stopSearch'
 
-  render: (query) =>
-    projectResults = @projectCollection.filter (project) ->
-      not _.isEmpty(project.get('name').match query)
+  render: (projectResults) =>
     @$el.append @searchResults.render(projectResults).el
     @
 
@@ -19,12 +17,13 @@ class Search extends Backbone.View
     if e.which is 13
       @stopSearch e
     else
-      query = @$('.search-query').val()
-      @render new RegExp query
+      query = new RegExp e.currentTarget.value
+      results = @projectCollection.filter (project) ->
+        not _.isEmpty(project.get('name').toLowerCase().match query)
+      @render(results)
 
   stopSearch: (e) =>
     if e.type is 'focusout' or e.which is 13
-      @searchResults.remove()
-
+      setTimeout @searchResults.remove, 10
 
 module.exports = Search
