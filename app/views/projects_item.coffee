@@ -16,6 +16,7 @@ class ProjectsItem extends ItemWithForm
     'click button.final-delete-btn' : 'destroy'
     'click button.final-deploy-btn' : 'deployProject'
     'click button.prev-deploys' : 'toggleDeploys'
+    'click button.last-commit' : 'lastCommit'
     'submit' : 'updateProject'
 
   toggleEdit: =>
@@ -55,5 +56,8 @@ class ProjectsItem extends ItemWithForm
       build_step: @$('[name="build-step"]').val()
       build_dir: @$('[name="build-dir"]').val()
     @toggleEdit()
+
+  lastCommit: (e) =>
+    @model.enqueueLastCommit()
 
 module.exports = ProjectsItem
