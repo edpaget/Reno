@@ -2,7 +2,7 @@
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Switch Organization </a>
   <ul class="dropdown-menu" role="menu" aria-labbledby="dropdownMenu">
     <li><a tabindex="-1" href="#/add_project/<%- @selected %>" data-org="<%- @selected %>"><%- @selected %>#</a></li>
-    <% if not _.isUndefined(org): %>
+    <% if not _.isUndefined(@orgs): %>
     <% for org in @orgs: %>
     <li><a tabindex="-1" href="#/add_project/<%- org %>" data-org="<%- org %>"><%- org %></a></li>
     <% end %>
