@@ -10,9 +10,9 @@
     <button class="btn btn-primary view-project-btn">View</button>
     <button class="btn btn-primary edit-project-btn">Edit</button>
     <% if not _.isUndefined(@last_commit): %>
-    <a href="#deploy-last-commit" role="button" data-toggle="modal" class="btn btn-warning deploy-btn">Deploy</a>
+    <a href="#deploy-last-commit-<%- @name.split('/')[1] %>" role="button" data-toggle="modal" class="btn btn-warning deploy-btn">Deploy</a>
     <% end %>
-    <a href="#delete-project" role="button" data-toggle="modal" class="btn btn-danger delete-btn">Delete</a>
+    <a href="#delete-project-<%- @name.split('/')[1] %>" role="button" data-toggle="modal" class="btn btn-danger delete-btn">Delete</a>
   </div>
 </div>
 
@@ -71,7 +71,7 @@
 </div>
 
 <% if not _.isUndefined(@last_commit): %>
-<div id="deploy-last-commit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deploy-modal-header" aria-hidden="true">
+<div id="deploy-last-commit-<%- @name.split('/')[1] %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deploy-modal-header" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
     <h3 id="deploy-modal-header">Deploy Last Commit</h3>
@@ -86,7 +86,7 @@
 </div>
 <% end %>
 
-<div id="delete-project" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="delete-modal-header" aria-hidden="true">
+<div id="delete-project-<%- @name.split('/')[1] %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="delete-modal-header" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
     <h3 id="delete-modal-header">Delete Project</h3>
