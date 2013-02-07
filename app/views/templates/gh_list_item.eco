@@ -1,5 +1,5 @@
 <div class="row listing">
-  <div class="span9 project">
+  <div class="span10 project">
     <h3><a href="#"><%- @name %></a>
       <% if not _.isUndefined @description: %>
       <small><%- @description %></small>

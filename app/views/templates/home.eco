@@ -1,9 +1,14 @@
 <div class="row">
-  <div class="span6">
-  </div>
-  <div class="span6">
+  <div class="span12 user-info">
+  <h1><img src="<%- @image %>" />
+  Hi, <%- @name %>! <small><a href="http://renoapi.zooniverse.org/users/signout">Signout</a></small></h1>
   </div>
 </div>
 
-<div class="row messages">
+<div class="row">
+  <div class="span12">
+    <h2>Recent Messages: </h2>
+  </div>
+</div>
+<div class="messages">
 </div>

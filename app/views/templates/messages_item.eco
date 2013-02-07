@@ -1,6 +1,7 @@
 <div class="row">
   <div class="span12">
-    <p><%- @status %><a class="show-more" href="#">Details</a> <span class="pull-right"><%- @created_at %></span></p>
+    <p><%- @status %>: <a class="show-more" href="#">Details</a> 
+      <span class="pull-right"><%- moment(@created_at).format('LLL') %></span></p>
     <p class="details"><%- @text %></p>
   </div>
 </div>

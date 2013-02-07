@@ -1,3 +1,7 @@
-<div class="pages"></div>
-<div class="org-switcher"></div>
+<div class="row">
+  <div class="span12">
+    <div class="pages pull-right"></div>
+    <div class="org-switcher pull-left"></div>
+  </div>
+</div>
 <div class="items"></div>

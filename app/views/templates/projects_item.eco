@@ -1,12 +1,16 @@
 <div class="row">
-  <div class="span7 project">
+  <div class="span8 project">
     <h3>
       <a href="#"><%- @name %></a>
-      <small>A Time Stamp Here</small>
+      <% if not _.isUndefined(@active_deploy): %>
+        <small>Last deploy: <%- moment(@active_deploy.build_time).format('L')%> at <%- moment(@active_deploy.build_time).format('LT') %></small>
+      <% else: %>
+        <small>Not Yet Deployed</small>
+      <% end %>
     </h3>
   </div>
 
-  <div class="span4 buttons">
+  <div class="span4 buttons pull-right">
     <button class="btn btn-primary view-project-btn">View</button>
     <button class="btn btn-primary edit-project-btn">Edit</button>
     <% if not _.isUndefined(@last_commit): %>

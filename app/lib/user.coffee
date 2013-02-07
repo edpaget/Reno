@@ -25,6 +25,7 @@ class User extends Backbone.Events
     @id = options.id
     @apiToken = options.oauth_token
     @username = options.github_username
+    @image = options.image
     @orgs = new Array
 
   loadOrgs: =>
