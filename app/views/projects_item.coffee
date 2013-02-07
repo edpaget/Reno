@@ -55,6 +55,7 @@ class ProjectsItem extends ItemWithForm
       branch: @$('[name="git-branch"]').val()
       build_step: @$('[name="build-step"]').val()
       build_dir: @$('[name="build-dir"]').val()
+      webhook: @$('input[type="checkbox"]').prop('checked')
     @toggleEdit()
 
   lastCommit: (e) =>

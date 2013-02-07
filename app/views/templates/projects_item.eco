@@ -1,7 +1,7 @@
 <div class="row">
   <div class="span8 project">
     <h3>
-      <a href="#"><%- @name %></a>
+      <a href="<%- @github_repository %>"><%- @name %></a>
       <% if not _.isUndefined(@active_deploy): %>
         <small>Last deploy: <%- moment(@active_deploy.build_time).format('L')%> at <%- moment(@active_deploy.build_time).format('LT') %></small>
       <% else: %>
@@ -25,12 +25,17 @@
     <div class="span6">
       <h4> General Info </h4>
       <ul>
-        <li>Github Link: <a href="<%- @github_url %>"><%- @github_repository %></a></li>
-        <li>Last Deploy: None Yet </li>
+        <li>Project
+        <li>Last Deploy: <% if not _.isUndefined(@active_deploy): %> 
+                           <%- moment(@active_deploy.build_time).format('LLL') %>
+                         <% else: %>
+                           None Yet
+                         <% end %></li>
         <li>Git Branch: <%- @branch %></li>
         <li>Build Command: <%- @build_step %></li>
         <li>Build Directory: <%- @build_dir %></li>
         <li>S3 Bucket: <%- @s3_bucket %></li>
+        <li>Webhook: <%- @webhook %></li>
       </ul>
     </div>
     <div class="span6">
@@ -64,7 +69,8 @@
           <input name="build-step" type="text" value="<%- @build_step %>" />
           <label>Build Directory</label>
           <input name="build-dir" type="text" value="<%- @build_dir %>" />
-          <br />
+          <label>Create Webhook</label>
+          <input type="checkbox" <% if @webhook: %>checked<% end %> /><br />
           <button type="submit" class="btn">Update Project</button>
         </div>
       </fieldset>

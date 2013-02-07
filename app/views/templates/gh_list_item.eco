@@ -20,6 +20,16 @@
         <input name="s3-bucket" type="text" />
         <label>Git Branch</label>
         <input name="git-branch" type="text" value="master"/>
+        <label>Project Type</label>
+        <select class="project-type">
+          <option value="">Select Project Type</option>
+          <option value="hem">Hem</option>
+          <option value="brunch">Brunch</option>
+          <option value="ec2-rails">EC2</option>
+          <option value="ec2-rails-elb">EC2 with ELB</option>
+          <option value="heroku-rails">Heroku</option>
+          <option value="custom">Custom</option>
+        </select>
       </div>
       <div class="span6">
         <label>Build Step</label>

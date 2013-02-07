@@ -27,6 +27,8 @@ class GithubProjectsItem extends ItemWithForm
       branch: @$('[name="git-branch"]').val()
       build_step: @$('[name="build-step"]').val()
       build_dir: @$('[name="build-dir"]').val()
+      webhook: @$('input[type="checkbox"]').prop('checked')
+      project_type: @$('.project-type').val()
       organization: if _.isUndefined @org then User.current.username else @org
     @model.toProject args
 
