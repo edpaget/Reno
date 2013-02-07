@@ -1,12 +1,18 @@
 MessagesList = require 'views/messages_list'
+User = require 'lib/user'
 
 class HomeView extends Backbone.View
+  template: require('./templates/home')
 
-  initailize: ->
-    @messsagesList.
+  initialize: ->
+    @messagesList = new MessagesList
 
   loadCollection: =>
     @messagesList.loadCollection()
 
+  render: =>
+    @$el.html @template(User.current)
+    @$('.messages').html @messagesList.render().el
+    @
 
-module.exports = Home.View
+module.exports = HomeView

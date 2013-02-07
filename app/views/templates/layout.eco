@@ -1,0 +1,27 @@
+<div class="navbar navbar-static-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <a href="#" class="brand">Reno</a>
+      <ul class="nav">
+        <li class="divider-vertical"></li>
+        <li><a href="#/project">Projects</a></li>
+        <li class="divider-vertical"></li>
+        <li><a href="#/add_project">Add Project</a></li>
+      </ul>
+      <ul class="nav pull-right">
+        <li class="divider-vertical"></li>
+        <% unless _.isNull(require('lib/user').current): %>
+        <li><a href="http://renoapi.zooniverse.org/users/signout">Signout</a></li>
+        <% else: %>
+        <li><a href="http://renoapi.zooniverse.org/auth/github">Sign in With Github</a></li>
+        <% end %>
+      </ul>
+      <form class="navbar-search pull-right">
+        <input type="text" class="search-query" placeholder="search">
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="content" class="container">
+</div>
