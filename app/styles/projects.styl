@@ -12,6 +12,10 @@
       &.active
         display: block
 
+      button.last-commit
+        display: block
+        margin-bottom: 10px
+
     div.edit-project
       display: none
 
@@ -23,9 +27,15 @@
 
     .deploys
       .row
-        padding-top: 5px
-        padding-bottom: 5px
+        padding-top: 10px
         border-top: 1px solid $light-grey
+
+        p
+          font-size: 12px
+
+        a.btn 
+          position: relative
+          top: -5px
 
       &:last
         border-bottom: 1px solid $light-grey

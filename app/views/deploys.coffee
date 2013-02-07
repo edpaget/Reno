@@ -5,12 +5,19 @@ class Deploys extends Backbone.View
   className: 'project-deploys'
   template: require './templates/deploy'
 
+  events:
+    'click button.final-deploy-btn' : 'deploy'
+
   initialize: (options) ->
     @collection = new Collection [], {projectId: options.projectId}
     @collection.on 'add reset', @render
 
   loadCollection: =>
     @collection.fetch()
+
+  deploy: (e) =>
+    id = e.currentTarget.dataset.id
+    @collection.get(id).deploy()
 
   render: =>
     @$el.empty()

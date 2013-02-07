@@ -1,5 +1,4 @@
 exports.config =
-  # Edit the next line to change default build path.
   paths:
     public: 'public'
 
@@ -38,18 +37,5 @@ exports.config =
        before: ['vendor/styles/bootstrap.css']
 
     templates:
-      defaultExtension: 'hbs'
+      defaultExtension: 'eco'
       joinTo: 'javascripts/app.js'
-
-  # Change this if you're using something other than backbone (e.g. 'ember').
-  # Content of files, generated with `brunch generate` depends on the setting.
-  # framework: 'backbone'
-
-  # Settings of web server that will run with `brunch watch [--server]`.
-  # server:
-  #   # Path to your server node.js module.
-  #   # If it's commented-out, brunch will use built-in express.js server.
-  #   path: 'server.coffee'
-  #   port: 3333
-  #   # Run even without `--server` option?
-  #   run: yes

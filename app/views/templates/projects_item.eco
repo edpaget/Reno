@@ -25,7 +25,7 @@
     <div class="span6">
       <h4> General Info </h4>
       <ul>
-        <li>Project
+        <li>Project Type: <%- @project_type %></li>
         <li>Last Deploy: <% if not _.isUndefined(@active_deploy): %> 
                            <%- moment(@active_deploy.build_time).format('LLL') %>
                          <% else: %>

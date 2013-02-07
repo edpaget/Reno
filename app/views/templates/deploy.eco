@@ -1,14 +1,31 @@
 <div class="row">
-  <div class="span4">
-  <p><%- @commit_message %> by <%- @commit_user %> at <%- @commit_time %>. </p>
+  <div class="span7">
+  <p><%- @commit_message %> by <%- @commit_user %> at <%- moment(@commit_time).format('LT') %> on <%- moment(@commit_time).format('L') %> </p>
   </div>
-  <div class="span4">
-  <p>Status: <%- @deploy_status %> at <%- @build_time %></p>
+  <div class="span3">
+  <% if @deploy_status is 'active': %> 
+  <p>Deployed at <%- moment(@build_time).format('LT') %> on <%- moment(@build_time).format('L') %> </p>
+  <% else if @deploy_status is 'archived': %>
+  <p>Archived at <%- moment(@build_time).format('LT') %> on <%- moment(@build_time).format('L') %> </p>
+  <% end %>
   </div>
   <% unless @deploy_status is 'active': %>
-  <div class="span4">
-  <button class="btn btn-warning rollback-deploy">Deploy</button>
+  <div class="span2">
+  <a href="#deploy-commit-<%- @git_ref %>" role="button" data-toggle="modal" class="btn btn-warning rollback-deploy">Deploy</a>
   </div>
   <% end %>
 </div>
 
+<div id="deploy-commit-<%- @git_ref %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deploy-modal-header" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="deploy-modal-header">Deploy Last Commit</h3>
+  </div>
+  <div class="modal-body">
+    <p> You are about to deploy commit #<%- @git_ref %> </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <button data-id="<%- @id %>" class="btn btn-danger final-deploy-btn" data-dismiss="modal" aria-hidden="true">Deploy</button>
+  </div>
+</div>
